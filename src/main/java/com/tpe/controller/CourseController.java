@@ -49,14 +49,13 @@ public class CourseController {
 //        model.addAttribute("course",foundCourse);
 //        return "courseForm";
 //    }
-        @GetMapping("/update")
-        public ModelAndView showUpdateForm(@RequestParam("id") Long id){
-        Course foundCourse = courseService.getById(id);
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("course",foundCourse);
-        mav.setViewName("courseForm");
-       return mav;
-    }
+@GetMapping("/update")
+public String updteCourse(@RequestParam("id") Long id, Model model){
+    Course foundCourse = courseService.getById(id);
+    model.addAttribute("course",foundCourse);
+    courseService.delete(foundCourse.getId());
+    return "courseForm";
+}
 
 
     //delete
